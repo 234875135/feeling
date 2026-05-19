@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Autopsy Beta is a free Windows Roblox tool with visuals, HUD widgets, aim settings, configs, hotkeys, and game tabs.">
+  <title>Autopsy Beta</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="scene-grid" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Autopsy home">
+      <span class="brand-main">AUTOPSY</span>
+      <span class="brand-beta">BETA</span>
+    </a>
+    <nav aria-label="Primary navigation">
+      <a href="#versions">Versions</a>
+      <a href="#features">Features</a>
+      <a href="#versions">Download</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="hero-copy reveal">
+        <p class="eyebrow">free windows release</p>
+        <h1>Autopsy for Roblox.</h1>
+        <p class="lead">
+          Clean visuals, useful widgets, fast binds, saved configs, and game tabs
+          in one menu that stays out of the way.
+        </p>
+        <div class="hero-actions" id="download">
+          <a class="button primary" href="#versions">Download</a>
+          <a class="button ghost" href="#versions">Version notes</a>
+        </div>
+        <div class="micro-stats" aria-label="Highlights">
+          <span>Free to use</span>
+          <span>Windows x64</span>
+        </div>
+      </div>
+
+      <div class="hero-stage reveal">
+        <div class="screenshot-card" aria-hidden="true"></div>
+
+        <aside class="console" aria-label="Autopsy status">
+          <div class="console-top">
+            <span></span><span></span><span></span>
+            <strong>status</strong>
+          </div>
+
+          <dl class="status-list">
+            <div>
+              <dt>Current Roblox</dt>
+              <dd id="liveHash">version-9377ee10133e4be3</dd>
+            </div>
+            <div>
+              <dt>Incoming Roblox</dt>
+              <dd id="incomingHash">version-3b42a15a305e47ec</dd>
+            </div>
+            <div>
+              <dt>Autopsy access</dt>
+              <dd>Free build</dd>
+            </div>
+            <div>
+              <dt>Updated</dt>
+              <dd id="updatedAt">May 19, 2026</dd>
+            </div>
+          </dl>
+        </aside>
+      </div>
+      <a class="scroll-cue" href="#features" aria-label="Scroll to features">
+        <span></span>
+      </a>
+    </section>
+
+    <section class="version-section reveal" id="versions" aria-labelledby="version-title">
+      <div class="section-kicker">
+        <p class="eyebrow">roblox builds</p>
+        <h2 id="version-title">Matched to the current Roblox build.</h2>
+      </div>
+      <div class="version-grid" id="versionGrid" aria-live="polite"></div>
+    </section>
+
+    <section class="feature-section" id="features" aria-labelledby="features-title">
+      <div class="section-kicker reveal">
+        <p class="eyebrow">advanced feature list</p>
+        <h2 id="features-title">What is inside.</h2>
+      </div>
+      <div class="feature-matrix" id="featureMatrix"></div>
+    </section>
+
+    <section class="download-panel reveal">
+      <div>
+        <p class="eyebrow">download</p>
+        <h2>Download the current release.</h2>
+        <p>
+          Free to use. Built for Windows x64.
+        </p>
+      </div>
+      <div class="download-actions">
+        <a class="button primary" data-download="live" href="/downloads/version-9377ee10133e4be3" download>Download current</a>
+        <a class="button disabled" data-download="incoming" href="/downloads/version-3b42a15a305e47ec.exe" aria-disabled="true">Queued</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span><strong>AUTOPSY</strong> <small>BETA</small></span>
+    <span>Free to use. Windows x64 Roblox utility.</span>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
