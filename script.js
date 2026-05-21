@@ -6,7 +6,7 @@ const siteConfig = {
       label: "Current release",
       status: "Ready",
       hash: "version-9377ee10133e4be3",
-      file: "/downloads/version-9377ee10133e4be3",
+      file: "/downloads/version-9377ee10133e4be3.exe",
       note: "For the live Roblox client."
     },
     {
