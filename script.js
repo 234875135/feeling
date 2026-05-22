@@ -5,6 +5,7 @@ const siteConfig = {
       id: "live",
       label: "Current release",
       status: "Ready",
+      available: true,
       hash: "version-9377ee10133e4be3",
       file: "/downloads/version-9377ee10133e4be3.exe",
       note: "For the live Roblox client."
@@ -12,10 +13,11 @@ const siteConfig = {
     {
       id: "incoming",
       label: "Next Roblox version",
-      status: "Soon",
+      status: "Ready",
+      available: true,
       hash: "version-4b6315bf1f0a4dbb",
       file: "/downloads/version-4b6315bf1f0a4dbb.exe",
-      note: "Not available yet."
+      note: "For the next Roblox client."
     }
   ],
   features: [
@@ -101,7 +103,7 @@ function setText(id, value) {
 }
 
 function versionCard(version) {
-  const ready = version.id === "live";
+  const ready = version.available === true;
   const actionText = ready ? "Download" : "Soon";
 
   return `
