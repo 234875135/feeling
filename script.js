@@ -13,8 +13,8 @@ const siteConfig = {
       id: "incoming",
       label: "Next Roblox version",
       status: "Soon",
-      hash: "version-3b42a15a305e47ec",
-      file: "/downloads/version-3b42a15a305e47ec.exe",
+      hash: "version-4b6315bf1f0a4dbb",
+      file: "/downloads/version-4b6315bf1f0a4dbb.exe",
       note: "Not available yet."
     }
   ],
