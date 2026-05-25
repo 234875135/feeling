@@ -6,19 +6,28 @@ const siteConfig = {
       label: "Current release",
       status: "Ready",
       available: true,
-      hash: "version-9377ee10133e4be3",
-      file: "/downloads/version-9377ee10133e4be3.exe",
+      hash: "version-2b1721d47abf49aa",
+      file: "/downloads/version-2b1721d47abf49aa.exe",
       note: "For the live Roblox client."
     },
     {
       id: "incoming",
-      label: "Next Roblox version",
+      label: "Explore other versions",
       status: "Ready",
       available: true,
       hash: "version-4b6315bf1f0a4dbb",
       file: "/downloads/version-4b6315bf1f0a4dbb.exe",
       note: "For the next Roblox client."
-    }
+    },
+    {
+      id: "legacy",
+      label: "Older version",
+      status: "Ready",
+      available: true,
+      hash: "version-9377ee10133e4be3",
+      file: "/downloads/version-9377ee10133e4be3.exe",
+      note: "Previous Roblox client."
+    },
   ],
   features: [
     {
@@ -105,6 +114,8 @@ function setText(id, value) {
 function versionCard(version) {
   const ready = version.available === true;
   const actionText = ready ? "Download" : "Soon";
+  const isGreen = document.body.getAttribute("data-theme") === "green";
+  const fileUrl = (isGreen && version.id === "live") ? "/downloads/gs-version-2b1721d47abf49aa.exe" : version.file;
 
   return `
     <article class="version-card ${ready ? "is-live" : "is-pending"}">
@@ -114,7 +125,7 @@ function versionCard(version) {
       </div>
       <code>${version.hash}</code>
       <p>${version.note}</p>
-      <a class="button ${ready ? "primary" : "disabled"}" href="${version.file}" ${ready ? "download" : "aria-disabled=\"true\""}>${actionText}</a>
+      <a class="button ${ready ? "primary" : "disabled"}" href="${fileUrl}" ${ready ? "download" : "aria-disabled=\"true\""}>${actionText}</a>
     </article>
   `;
 }
@@ -138,8 +149,10 @@ function applyConfig() {
   setText("incomingHash", incoming.hash);
   setText("updatedAt", siteConfig.updatedAt);
 
+  const isGreen = document.body.getAttribute("data-theme") === "green";
+
   document.querySelectorAll("[data-download='live']").forEach((link) => {
-    link.href = live.file;
+    link.href = isGreen ? "/downloads/gs-version-2b1721d47abf49aa.exe" : live.file;
   });
 
   document.querySelectorAll("[data-download='incoming']").forEach((link) => {
@@ -148,7 +161,10 @@ function applyConfig() {
 
   const versionGrid = document.getElementById("versionGrid");
   if (versionGrid) {
-    versionGrid.innerHTML = siteConfig.versions.map(versionCard).join("");
+    const versions = isGreen 
+      ? siteConfig.versions.filter((version) => version.id === "live")
+      : siteConfig.versions;
+    versionGrid.innerHTML = versions.map(versionCard).join("");
   }
 
   const featureMatrix = document.getElementById("featureMatrix");
@@ -210,4 +226,25 @@ handleScroll();
 
 window.addEventListener("load", () => {
   document.body.classList.add("loaded");
+});
+
+/* ── Protection: disable right-click ── */
+document.addEventListener("contextmenu", (e) => e.preventDefault());
+
+/* ── Protection: disable text selection via JS fallback ── */
+document.addEventListener("selectstart", (e) => e.preventDefault());
+
+/* ── Protection: disable drag ── */
+document.addEventListener("dragstart", (e) => e.preventDefault());
+
+/* ── Protection: block devtools shortcuts ── */
+document.addEventListener("keydown", (e) => {
+  // F12
+  if (e.key === "F12") { e.preventDefault(); return; }
+  // Ctrl+Shift+I / Ctrl+Shift+J / Ctrl+Shift+C
+  if (e.ctrlKey && e.shiftKey && (e.key === "I" || e.key === "i" || e.key === "J" || e.key === "j" || e.key === "C" || e.key === "c")) { e.preventDefault(); return; }
+  // Ctrl+U (view source)
+  if (e.ctrlKey && (e.key === "U" || e.key === "u")) { e.preventDefault(); return; }
+  // Ctrl+S (save page)
+  if (e.ctrlKey && (e.key === "S" || e.key === "s")) { e.preventDefault(); return; }
 });

@@ -3,16 +3,33 @@
   --panel: rgba(3, 10, 16, 0.86);
   --panel-strong: rgba(4, 13, 22, 0.96);
   --panel-soft: rgba(8, 20, 31, 0.68);
-  --line: rgba(87, 201, 255, 0.22);
+  --line: rgba(0, 174, 255, 0.22);
   --line-strong: rgba(0, 174, 255, 0.68);
   --text: #eef8ff;
   --muted: #99b1c0;
   --dim: #637987;
-  --accent: #00aeff;
-  --accent-hot: #73dcff;
+  --accent: #00aeff; /* Blue */
+  --accent-hot: #73dcff; /* Lighter blue */
   --success: #00ff88;
   --warning: #ffb700;
   --shadow: rgba(0, 174, 255, 0.35);
+  --glow-1: rgba(0, 174, 255, 0.18);
+  --glow-2: rgba(115, 220, 255, 0.12);
+  --bg-gradient-mid: #07121d;
+  --grid-1: rgba(0, 174, 255, 0.07);
+  --grid-2: rgba(0, 174, 255, 0.05);
+
+  --accent-glow-34: rgba(0, 174, 255, 0.34);
+  --accent-glow-22: rgba(0, 174, 255, 0.22);
+  --accent-glow-15: rgba(0, 174, 255, 0.15);
+  --accent-glow-16: rgba(0, 174, 255, 0.16);
+  --accent-glow-10: rgba(0, 174, 255, 0.10);
+  --accent-glow-09: rgba(0, 174, 255, 0.09);
+  --accent-glow-11: rgba(115, 220, 255, 0.11);
+  --accent-glow-12: rgba(0, 174, 255, 0.12);
+  --accent-glow-18: rgba(87, 201, 255, 0.18);
+  --accent-glow-14: rgba(87, 201, 255, 0.14);
+
   --font: "Trebuchet MS", "Segoe UI", sans-serif;
   --mono: Consolas, "Courier New", monospace;
   --max: 1180px;
@@ -21,8 +38,39 @@
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
+[data-theme="green"] {
+  --panel: rgba(3, 16, 10, 0.86);
+  --panel-strong: rgba(4, 22, 13, 0.96);
+  --panel-soft: rgba(8, 31, 20, 0.68);
+  --line: rgba(0, 200, 83, 0.22);
+  --line-strong: rgba(0, 200, 83, 0.68);
+  --text: #eeffee;
+  --muted: #99c0a6;
+  --dim: #638771;
+  --accent: #00c853; /* Green */
+  --accent-hot: #69f0ae; /* Lighter green */
+  --shadow: rgba(0, 200, 83, 0.35);
+  --glow-1: rgba(0, 200, 83, 0.18);
+  --glow-2: rgba(105, 240, 174, 0.12);
+  --bg-gradient-mid: #021a0a;
+  --grid-1: rgba(0, 200, 83, 0.07);
+  --grid-2: rgba(0, 200, 83, 0.05);
+
+  --accent-glow-34: rgba(0, 200, 83, 0.34);
+  --accent-glow-22: rgba(0, 200, 83, 0.22);
+  --accent-glow-15: rgba(0, 200, 83, 0.15);
+  --accent-glow-16: rgba(0, 200, 83, 0.16);
+  --accent-glow-10: rgba(0, 200, 83, 0.10);
+  --accent-glow-09: rgba(0, 200, 83, 0.09);
+  --accent-glow-11: rgba(105, 240, 174, 0.11);
+  --accent-glow-12: rgba(0, 200, 83, 0.12);
+  --accent-glow-18: rgba(105, 240, 174, 0.18);
+  --accent-glow-14: rgba(105, 240, 174, 0.14);
+}
+
 * {
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
 html {
@@ -58,13 +106,18 @@ body {
   margin: 0;
   color: var(--text);
   background:
-    radial-gradient(circle at 84% 10%, rgba(0, 174, 255, 0.18), transparent 33rem),
-    radial-gradient(circle at 4% 78%, rgba(115, 220, 255, 0.12), transparent 28rem),
-  linear-gradient(135deg, #02060a 0%, #07121d 48%, #020409 100%);
+    radial-gradient(circle at 84% 10%, var(--glow-1), transparent 33rem),
+    radial-gradient(circle at 4% 78%, var(--glow-2), transparent 28rem),
+    linear-gradient(135deg, #02060a 0%, var(--bg-gradient-mid) 48%, #020409 100%);
   font-family: var(--font);
   overflow-x: hidden;
   opacity: 0;
   transition: opacity .7s var(--ease);
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
 }
 
 body.loaded {
@@ -80,8 +133,8 @@ body.loaded {
 
 .scene-grid {
   background-image:
-    linear-gradient(rgba(0, 174, 255, 0.07) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 174, 255, 0.05) 1px, transparent 1px);
+    linear-gradient(var(--grid-1) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-2) 1px, transparent 1px);
   background-size: 44px 44px;
   mask-image: linear-gradient(to bottom, black, transparent 82%);
 }
@@ -111,18 +164,20 @@ a {
   border-radius: var(--radius);
   background: rgba(2, 7, 12, 0.78);
   backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
   box-shadow: 0 18px 60px rgba(0, 0, 0, 0.30);
   opacity: 0;
   transform: translate3d(0, -10px, 0);
   animation: pageDrop .7s var(--ease) .08s forwards;
   will-change: transform, opacity;
+  backface-visibility: hidden;
   transition: padding 0.3s var(--ease), background 0.3s var(--ease), border-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
 }
 
 .site-header.scrolled {
   background: rgba(2, 7, 12, 0.94);
-  border-color: rgba(0, 174, 255, 0.38);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 174, 255, 0.1);
+  border-color: var(--line-strong);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 15px var(--accent-glow-10);
   padding: 8px 14px 8px 18px;
 }
 
@@ -140,7 +195,7 @@ footer strong {
   font-size: 1.18rem;
   line-height: 1;
   letter-spacing: 0;
-  text-shadow: 0 0 18px rgba(0, 174, 255, 0.34);
+  text-shadow: 0 0 18px var(--accent-glow-34);
 }
 
 .brand-beta,
@@ -167,7 +222,7 @@ nav a {
 
 nav a:hover {
   color: var(--text);
-  background: rgba(0, 174, 255, 0.11);
+  background: var(--accent-glow-11);
 }
 
 main {
@@ -223,7 +278,7 @@ h1 {
   line-height: 0.88;
   letter-spacing: -0.01em;
   text-transform: uppercase;
-  text-shadow: 0 0 34px rgba(0, 174, 255, 0.22);
+  text-shadow: 0 0 34px var(--accent-glow-22);
 }
 
 h2 {
@@ -267,6 +322,8 @@ h3 {
   border-radius: 8px;
   font-weight: 900;
   white-space: nowrap;
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
   transition: transform 0.25s var(--ease), border-color 0.25s var(--ease), background 0.25s var(--ease), box-shadow 0.25s var(--ease);
 }
 
@@ -282,10 +339,32 @@ h3 {
   color: #00111b;
   background: linear-gradient(135deg, var(--accent), var(--accent-hot));
   border-color: transparent;
-  box-shadow: 0 8px 24px rgba(0, 174, 255, 0.25);
+  box-shadow: 0 8px 24px var(--shadow);
 }
 
 .button.primary:hover {
+  box-shadow: 0 12px 30px var(--shadow);
+}
+
+.button.primary.green {
+  color: #00111b;
+  background: linear-gradient(135deg, #00c853, #69f0ae);
+  border-color: transparent;
+  box-shadow: 0 8px 24px rgba(0, 200, 83, 0.25);
+}
+
+.button.primary.green:hover {
+  box-shadow: 0 12px 30px rgba(0, 200, 83, 0.45);
+}
+
+.button.primary.blue {
+  color: #00111b;
+  background: linear-gradient(135deg, #00aeff, #73dcff);
+  border-color: transparent;
+  box-shadow: 0 8px 24px rgba(0, 174, 255, 0.25);
+}
+
+.button.primary.blue:hover {
   box-shadow: 0 12px 30px rgba(0, 174, 255, 0.45);
 }
 
@@ -295,7 +374,7 @@ h3 {
 }
 
 .button.ghost:hover {
-  background: rgba(0, 174, 255, 0.12);
+  background: var(--accent-glow-12);
   border-color: var(--line-strong);
 }
 
@@ -315,7 +394,7 @@ h3 {
 
 .micro-stats span {
   padding: 7px 10px;
-  border: 1px solid rgba(87, 201, 255, 0.18);
+  border: 1px solid var(--accent-glow-18);
   border-radius: 999px;
   color: var(--muted);
   background: rgba(2, 8, 14, 0.62);
@@ -329,7 +408,7 @@ h3 {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background:
-    linear-gradient(180deg, rgba(0, 174, 255, 0.09), transparent 48%),
+    linear-gradient(180deg, var(--accent-glow-09), transparent 48%),
     var(--panel);
   box-shadow: 0 24px 86px rgba(0, 0, 0, 0.34), inset 0 0 0 1px rgba(255,255,255,.035);
   position: relative;
@@ -344,7 +423,7 @@ h3 {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  background: linear-gradient(115deg, transparent 0%, rgba(115, 220, 255, .11) 42%, transparent 58%);
+  background: linear-gradient(115deg, transparent 0%, var(--accent-glow-11) 42%, transparent 58%);
   transform: translateX(-120%);
   transition: transform .9s var(--ease);
 }
@@ -420,7 +499,7 @@ h3 {
 .console:hover {
   border-color: var(--line-strong);
   transform: translate3d(-12%, 39px, 0) scale(1.01);
-  box-shadow: 0 28px 90px rgba(0, 174, 255, 0.15), inset 0 0 0 1px rgba(255,255,255,.05);
+  box-shadow: 0 28px 90px var(--accent-glow-15), inset 0 0 0 1px rgba(255,255,255,.05);
 }
 
 .console::before {
@@ -429,7 +508,7 @@ h3 {
   inset: -26px;
   z-index: -1;
   border-radius: 28px;
-  background: radial-gradient(circle, rgba(0, 174, 255, 0.22), transparent 64%);
+  background: radial-gradient(circle, var(--accent-glow-22), transparent 64%);
   filter: blur(20px);
 }
 
@@ -539,7 +618,7 @@ h3 {
   grid-template-columns: 100px minmax(0, 1fr);
   gap: 10px;
   padding: 10px 0;
-  border-top: 1px solid rgba(87, 201, 255, 0.14);
+  border-top: 1px solid var(--accent-glow-14);
 }
 
 dt {
@@ -585,7 +664,7 @@ dd {
   border: 1px solid var(--line);
   border-radius: 999px;
   background: rgba(3, 10, 16, .72);
-  box-shadow: 0 18px 52px rgba(0, 0, 0, .34), 0 0 28px rgba(0, 174, 255, .16);
+  box-shadow: 0 18px 52px rgba(0, 0, 0, .34), 0 0 28px var(--accent-glow-16);
   transform: translate3d(-50%, 0, 0);
   transition: transform 0.4s var(--ease), border-color 0.25s var(--ease), background 0.25s var(--ease), opacity 0.4s var(--ease), visibility 0.4s var(--ease);
   animation: cueFloat 1.8s var(--ease) infinite;
@@ -600,7 +679,7 @@ dd {
 
 .scroll-cue:hover {
   border-color: var(--line-strong);
-  background: rgba(0, 174, 255, .12);
+  background: var(--accent-glow-12);
 }
 
 .scroll-cue span {
@@ -693,9 +772,9 @@ code {
   border-color: var(--line-strong);
   transform: translateY(-8px) scale(1.01);
   background:
-    linear-gradient(180deg, rgba(0, 174, 255, 0.14), transparent 52%),
+    linear-gradient(180deg, var(--accent-glow-14), transparent 52%),
     var(--panel-strong);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px rgba(0, 174, 255, 0.12);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 30px var(--accent-glow-12);
   transition: transform 0.3s var(--ease), border-color 0.3s var(--ease), background 0.3s var(--ease), box-shadow 0.3s var(--ease);
 }
 
@@ -782,6 +861,7 @@ footer {
 .feature-card {
   opacity: 0;
   transform: translate3d(0, 30px, 0) scale(0.98);
+  backface-visibility: hidden;
   transition:
     opacity 0.85s var(--ease),
     transform 0.85s var(--ease),
